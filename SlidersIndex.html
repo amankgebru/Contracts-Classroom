@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contract Law Control Panel</title>
+
+  <style>
+    :root {
+      --navy: #14213d;
+      --blue: #2563eb;
+      --light-blue: #dbeafe;
+      --orange: #f59e0b;
+      --light-orange: #fef3c7;
+      --green: #15803d;
+      --red: #b91c1c;
+      --gray: #64748b;
+      --light-gray: #f1f5f9;
+      --border: #cbd5e1;
+      --white: #ffffff;
+      --black: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: var(--black);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    .page {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 28px 36px 50px;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    header {
+      margin-bottom: 28px;
+      border-bottom: 4px solid var(--navy);
+      padding-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 1.15rem;
+    }
+
+    /* ---------- CONTROLS ---------- */
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .case-picker {
+      flex: 1 1 430px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    select {
+      width: 100%;
+      min-height: 52px;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      color: var(--black);
+      font-size: 1.05rem;
+    }
+
+    button {
+      min-height: 52px;
+      padding: 10px 20px;
+      border-radius: 9px;
+      border: 2px solid var(--navy);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    #resetButton {
+      background: white;
+      color: var(--navy);
+    }
+
+    #revealButton {
+      background: var(--navy);
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.88;
+    }
+
+    button:focus,
+    select:focus,
+    input:focus {
+      outline: 4px solid var(--light-blue);
+      outline-offset: 2px;
+    }
+
+    /* ---------- CASE QUESTION ---------- */
+
+    .case-question {
+      margin-bottom: 28px;
+      padding: 18px 22px;
+      border-left: 7px solid var(--orange);
+      border-radius: 7px;
+      background: var(--light-orange);
+      font-size: 1.12rem;
+      line-height: 1.5;
+    }
+
+    .case-question strong {
+      color: var(--navy);
+    }
+
+    /* ---------- SLIDER CARDS ---------- */
+
+    .slider-card {
+      margin-bottom: 22px;
+      padding: 22px 26px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .slider-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 3px;
+    }
+
+    .slider-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .student-position {
+      min-width: 145px;
+      color: var(--blue);
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .slider-description {
+      margin: 0 0 20px;
+      color: var(--gray);
+    }
+
+    .spectrum {
+      display: grid;
+      grid-template-columns: 160px 1fr 160px;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .endpoint {
+      color: var(--navy);
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .endpoint.left {
+      text-align: right;
+    }
+
+    .endpoint.right {
+      text-align: left;
+    }
+
+    /* ---------- RANGE SLIDER ---------- */
+
+    .range-wrap {
+      position: relative;
+      padding: 8px 0;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 10px;
+      margin: 0;
+      border-radius: 10px;
+      background: linear-gradient(
+        to right,
+        var(--navy),
+        #94a3b8,
+        var(--orange)
+      );
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      width: 28px;
+      height: 28px;
+      border: 4px solid white;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 2px var(--blue);
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border: 4px solid white;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+
+    /* ---------- COURT MARKER ---------- */
+
+    .court-marker {
+      position: absolute;
+      top: -2px;
+      width: 6px;
+      height: 36px;
+      border-radius: 4px;
+      background: var(--red);
+      transform: translateX(-50%);
+      display: none;
+      z-index: 5;
+    }
+
+    .court-marker::after {
+      content: "COURT";
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--red);
+      color: white;
+      font-size: 0.66rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .court-marker.visible {
+      display: block;
+    }
+
+    /* ---------- SCALE ---------- */
+
+    .scale-labels {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 0.72rem;
+      text-align: center;
+    }
+
+    /* ---------- EXPLANATION ---------- */
+
+    .court-explanation {
+      display: none;
+      margin-top: 20px;
+      padding: 13px 16px;
+      border-left: 5px solid var(--red);
+      background: #fef2f2;
+      line-height: 1.45;
+    }
+
+    .court-explanation.visible {
+      display: block;
+    }
+
+    /* ---------- LEGEND ---------- */
+
+    .legend {
+      display: none;
+      margin-top: 28px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--light-gray);
+      line-height: 1.5;
+    }
+
+    .legend.visible {
+      display: block;
+    }
+
+    .blue-dot,
+    .red-line {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    .blue-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .red-line {
+      width: 5px;
+      height: 19px;
+      margin-left: 15px;
+      background: var(--red);
+    }
+
+    /* ---------- CLASSROOM PROMPT ---------- */
+
+    .discussion {
+      margin-top: 26px;
+      padding: 18px 22px;
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
+    }
+
+    .discussion strong {
+      color: #fde68a;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 20px 16px 40px;
+      }
+
+      .spectrum {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .endpoint.left,
+      .endpoint.right {
+        text-align: center;
+      }
+
+      .endpoint.left::after {
+        content: "  ←";
+      }
+
+      .endpoint.right::before {
+        content: "→  ";
+      }
+
+      .slider-heading {
+        display: block;
+      }
+
+      .student-position {
+        margin-top: 6px;
+        text-align: left;
+      }
+    }
+
+    /* ---------- PROJECTOR MODE ---------- */
+
+    @media (min-width: 1100px) {
+      .slider-card {
+        padding: 26px 34px;
+      }
+
+      .spectrum {
+        grid-template-columns: 190px 1fr 190px;
+      }
+
+      .endpoint {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <header>
+      <h1>Contract Law Control Panel</h1>
+      <div class="subtitle">
+        Set the controls. Defend your choices. Then reveal the court.
+      </div>
+    </header>
+
+    <div class="toolbar">
+
+      <div class="case-picker">
+        <label for="caseSelect">CASE</label>
+
+        <select id="caseSelect">
+          <option value="pacific">
+            Pacific Gas & Electric Co. v. G.W. Thomas Drayage & Rigging Co.
+          </option>
+
+          <option value="masterson">
+            Masterson v. Sine
+          </option>
+
+          <option value="united">
+            United Airlines, Inc. v. Good Taste, Inc.
+          </option>
+
+          <option value="hirschfeld">
+            Al Hirschfeld Foundation v. Margo Feiden Galleries, Ltd.
+          </option>
+        </select>
+      </div>
+
+      <button id="resetButton" type="button">
+        Reset
+      </button>
+
+      <button id="revealButton" type="button">
+        Reveal Court
+      </button>
+
+    </div>
+
+
+    <div id="caseQuestion" class="case-question"></div>
+
+
+    <!-- SLIDER 1 -->
+
+    <section class="slider-card">
+
+      <div class="slider-heading">
+        <h2>1. Where does contractual meaning come from?</h2>
+        <div id="position1" class="student-position">Neutral</div>
+      </div>
+
+      <p class="slider-description">
+        How heavily should the court rely on the written words compared with
+        surrounding context?
+      </p>
+
+      <div class="spectrum">
+
+        <div class="endpoint left">
+          TEXTUALISM
+        </div>
+
+        <div>
+
+          <div class="range-wrap">
+
+            <input
+              id="slider1"
+              type="range"
+              min="0"
+              max="100"
+              step="25"
+              value="50"
+              aria-label="Textualism to contextualism"
+            >
+
+            <div id="court1" class="court-marker"></div>
+
+          </div>
+
+          <div class="scale-labels">
+            <span>Strong</span>
+            <span>Moderate</span>
+            <span>Neutral</span>
+            <span>Moderate</span>
+            <span>Strong</span>
+          </div>
+
+        </div>
+
+        <div class="endpoint right">
+          CONTEXTUALISM
+        </div>
+
+      </div>
+
+      <div id="explanation1" class="court-explanation"></div>
+
+    </section>
+
+
+    <!-- SLIDER 2 -->
+
+    <section class="slider-card">
+
+      <div class="slider-heading">
+        <h2>2. What value gets priority?</h2>
+        <div id="position2" class="student-position">Neutral</div>
+      </div>
+
+      <p class="slider-description">
+        Does the approach emphasize enforcement of private ordering or give
+        greater weight to fairness and equitable concerns?
+      </p>
+
+      <div class="spectrum">
+
+        <div class="endpoint left">
+          AUTONOMY
+        </div>
+
+        <div>
+
+          <div class="range-wrap">
+
+            <input
+              id="slider2"
+              type="range"
+              min="0"
+              max="100"
+              step="25"
+              value="50"
+              aria-label="Autonomy to fairness"
+            >
+
+            <div id="court2" class="court-marker"></div>
+
+          </div>
+
+          <div class="scale-labels">
+            <span>Strong</span>
+            <span>Moderate</span>
+            <span>Neutral</span>
+            <span>Moderate</span>
+            <span>Strong</span>
+          </div>
+
+        </div>
+
+        <div class="endpoint right">
+          FAIRNESS
+        </div>
+
+      </div>
+
+      <div id="explanation2" class="court-explanation"></div>
+
+    </section>
+
+
+    <!-- SLIDER 3 -->
+
+    <section class="slider-card">
+
+      <div class="slider-heading">
+        <h2>3. How constrained is the decision?</h2>
+        <div id="position3" class="student-position">Neutral</div>
+      </div>
+
+      <p class="slider-description">
+        Does the doctrine operate like a relatively predictable rule or a
+        flexible standard requiring judicial judgment?
+      </p>
+
+      <div class="spectrum">
+
+        <div class="endpoint left">
+          RULES
+        </div>
+
+        <div>
+
+          <div class="range-wrap">
+
+            <input
+              id="slider3"
+              type="range"
+              min="0"
+              max="100"
+              step="25"
+              value="50"
+              aria-label="Rules to standards"
+            >
+
+            <div id="court3" class="court-marker"></div>
+
+          </div>
+
+          <div class="scale-labels">
+            <span>Strong</span>
+            <span>Moderate</span>
+            <span>Neutral</span>
+            <span>Moderate</span>
+            <span>Strong</span>
+          </div>
+
+        </div>
+
+        <div class="endpoint right">
+          STANDARDS
+        </div>
+
+      </div>
+
+      <div id="explanation3" class="court-explanation"></div>
+
+    </section>
+
+
+    <div id="legend" class="legend">
+
+      <span class="blue-dot"></span>
+      <strong>Blue circle:</strong> your/class position.
+
+      <span class="red-line"></span>
+      <strong>Red marker:</strong> one defensible characterization of the court.
+
+      <br><br>
+
+      The court marker is deliberately a teaching judgment rather than a
+      mathematical measurement. Students should be encouraged to challenge it.
+
+    </div>
+
+
+    <div class="discussion">
+
+      <strong>Socratic prompt:</strong>
+      What feature of the opinion would justify moving one of these controls
+      one position to the left or right?
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    /* =========================================================
+       CASE DATA
+       ========================================================= */
+
+    const cases = {
+
+      pacific: {
+
+        question:
+          "<strong>INTERPRETATION:</strong> When contractual language appears clear, how much surrounding context should a court consider before deciding what the language means?",
+
+        courtPositions: [100, 25, 100],
+
+        explanations: [
+
+          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court strongly favors contextual interpretation. Extrinsic evidence may be considered to determine whether apparently clear language is reasonably susceptible to the meaning asserted.",
+
+          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The opinion is principally concerned with discovering the parties’ intended meaning rather than correcting an unfair bargain. Private ordering therefore remains important.",
+
+          "<strong>RULES ↔ STANDARDS:</strong> The “reasonably susceptible” inquiry gives judges substantial interpretive discretion and moves away from a rigid four-corners rule."
+
+        ]
+
+      },
+
+
+      masterson: {
+
+        question:
+          "<strong>PAROL EVIDENCE:</strong> When should evidence of an alleged collateral agreement be admitted even though the parties have reduced their transaction to writing?",
+
+        courtPositions: [75, 75, 75],
+
+        explanations: [
+
+          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court resists determining integration solely from the face of the document and considers the circumstances surrounding the transaction.",
+
+          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The approach leaves room for evidence that the formal writing may not capture the parties’ entire understanding, reducing the risk that formality defeats an agreement actually made.",
+
+          "<strong>RULES ↔ STANDARDS:</strong> Asking whether parties would “naturally” have included the alleged collateral term in the writing requires contextual judgment rather than mechanical application of a four-corners rule."
+
+        ]
+
+      },
+
+
+      united: {
+
+        question:
+          "<strong>CONSTRUCTION & GOOD FAITH:</strong> When may the implied obligation of good faith constrain a party’s exercise of contractual discretion?",
+
+        courtPositions: [75, 75, 100],
+
+        explanations: [
+
+          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> Good-faith analysis requires looking beyond isolated contractual words to the bargain, the parties’ performance, and the commercial relationship.",
+
+          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The implied covenant may restrain opportunistic exercises of contractual discretion, although it cannot simply rewrite the bargain the parties chose.",
+
+          "<strong>RULES ↔ STANDARDS:</strong> Good faith is highly standard-like. Its application depends on contractual purpose, commercial context, reasonable expectations, and judicial evaluation."
+
+        ]
+
+      },
+
+
+      hirschfeld: {
+
+        question:
+          "<strong>MATERIAL BREACH:</strong> When does a breach go sufficiently to the heart of the bargain to justify treating it as material?",
+
+        courtPositions: [75, 25, 100],
+
+        explanations: [
+
+          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court considers the structure and underlying purpose of the agreement in deciding whether the breaches were fundamental.",
+
+          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The analysis strongly protects the contractual interests the Foundation bargained to preserve, including control over reproduction and safeguarding the works.",
+
+          "<strong>RULES ↔ STANDARDS:</strong> Materiality is a paradigmatic standard. The court evaluates whether the breach defeats the root or essential purpose of the agreement rather than applying a simple bright-line test."
+
+        ]
+
+      }
+
+    };
+
+
+    /* =========================================================
+       ELEMENT REFERENCES
+       ========================================================= */
+
+    const caseSelect =
+      document.getElementById("caseSelect");
+
+    const caseQuestion =
+      document.getElementById("caseQuestion");
+
+    const resetButton =
+      document.getElementById("resetButton");
+
+    const revealButton =
+      document.getElementById("revealButton");
+
+    const legend =
+      document.getElementById("legend");
+
+
+    const sliders = [
+      document.getElementById("slider1"),
+      document.getElementById("slider2"),
+      document.getElementById("slider3")
+    ];
+
+
+    const positionLabels = [
+      document.getElementById("position1"),
+      document.getElementById("position2"),
+      document.getElementById("position3")
+    ];
+
+
+    const courtMarkers = [
+      document.getElementById("court1"),
+      document.getElementById("court2"),
+      document.getElementById("court3")
+    ];
+
+
+    const explanations = [
+      document.getElementById("explanation1"),
+      document.getElementById("explanation2"),
+      document.getElementById("explanation3")
+    ];
+
+
+    /* =========================================================
+       LABELS
+       ========================================================= */
+
+    const sliderLabels = [
+      [
+        "Strong Textualism",
+        "Moderate Textualism",
+        "Neutral",
+        "Moderate Contextualism",
+        "Strong Contextualism"
+      ],
+
+      [
+        "Strong Autonomy",
+        "Moderate Autonomy",
+        "Neutral",
+        "Moderate Fairness",
+        "Strong Fairness"
+      ],
+
+      [
+        "Strong Rules",
+        "Moderate Rules",
+        "Neutral",
+        "Moderate Standards",
+        "Strong Standards"
+      ]
+    ];
+
+
+    /* =========================================================
+       FUNCTIONS
+       ========================================================= */
+
+    function labelForSlider(sliderIndex, value) {
+
+      const index =
+        Math.round(Number(value) / 25);
+
+      return sliderLabels[sliderIndex][index];
+
+    }
+
+
+    function updateStudentPosition(sliderIndex) {
+
+      const slider =
+        sliders[sliderIndex];
+
+      positionLabels[sliderIndex].textContent =
+        labelForSlider(
+          sliderIndex,
+          slider.value
+        );
+
+    }
+
+
+    function hideCourt() {
+
+      courtMarkers.forEach(marker => {
+        marker.classList.remove("visible");
+      });
+
+      explanations.forEach(box => {
+        box.classList.remove("visible");
+      });
+
+      legend.classList.remove("visible");
+
+    }
+
+
+    function resetSliders() {
+
+      sliders.forEach((slider, index) => {
+
+        slider.value = 50;
+
+        updateStudentPosition(index);
+
+      });
+
+      hideCourt();
+
+    }
+
+
+    function loadCase() {
+
+      const selectedCase =
+        cases[caseSelect.value];
+
+      caseQuestion.innerHTML =
+        selectedCase.question;
+
+      resetSliders();
+
+    }
+
+
+    function revealCourt() {
+
+      const selectedCase =
+        cases[caseSelect.value];
+
+      selectedCase.courtPositions.forEach(
+        (position, index) => {
+
+          const marker =
+            courtMarkers[index];
+
+          marker.style.left =
+            position + "%";
+
+          marker.classList.add("visible");
+
+
+          explanations[index].innerHTML =
+            selectedCase.explanations[index];
+
+          explanations[index].classList.add(
+            "visible"
+          );
+
+        }
+      );
+
+      legend.classList.add("visible");
+
+    }
+
+
+    /* =========================================================
+       EVENT LISTENERS
+       ========================================================= */
+
+    sliders.forEach(
+      (slider, index) => {
+
+        slider.addEventListener(
+          "input",
+          () => updateStudentPosition(index)
+        );
+
+      }
+    );
+
+
+    caseSelect.addEventListener(
+      "change",
+      loadCase
+    );
+
+
+    resetButton.addEventListener(
+      "click",
+      resetSliders
+    );
+
+
+    revealButton.addEventListener(
+      "click",
+      revealCourt
+    );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    loadCase();
+
+  </script>
+
+</body>
+</html>
