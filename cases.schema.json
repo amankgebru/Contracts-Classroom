@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contracts slider exercise data",
+  "description": "Three fixed axes: (1) textualism to contextualism, (2) autonomy to fairness, (3) rules to standards. Cases are chosen by the author of the data, from the course teaching materials, because they best bring out those three spectrums; at most 10. Court positions run 0-100 in steps of 25 (0 = strong left pole, 50 = neutral, 100 = strong right pole). A position of null means the axis is not at issue in that case. All text is plain text, no HTML.",
+  "type": "object",
+  "required": [
+    "version",
+    "selection",
+    "axes",
+    "cases"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/axis"
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      },
+      "maxItems": 10
+    },
+    "selection": {
+      "type": "object",
+      "required": [
+        "instruction",
+        "maxCases",
+        "source",
+        "coverageGoal"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "instruction": {
+          "type": "string",
+          "description": "The selection instruction the data was generated under."
+        },
+        "maxCases": {
+          "const": 10
+        },
+        "source": {
+          "type": "string",
+          "description": "Where cases come from, e.g. the course teaching materials. Cases must be major cases listed there."
+        },
+        "coverageGoal": {
+          "type": "string",
+          "description": "What the set as a whole should achieve across the three spectrums."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "axis": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "description",
+        "left",
+        "right"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Question shown above the slider, e.g. Where does contractual meaning come from?"
+        },
+        "description": {
+          "type": "string",
+          "description": "One or two sentences telling students what the poles mean."
+        },
+        "left": {
+          "type": "string",
+          "description": "Left pole label, e.g. Textualism"
+        },
+        "right": {
+          "type": "string",
+          "description": "Right pole label, e.g. Contextualism"
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "topic",
+        "question",
+        "whyChosen",
+        "court",
+        "sourceNote"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Case name as shown in the dropdown."
+        },
+        "citation": {
+          "type": "string",
+          "description": "Reporter citation, e.g. 68 Cal. 2d 33 (1968). Optional."
+        },
+        "topic": {
+          "type": "string",
+          "description": "Doctrinal heading, e.g. Parol Evidence."
+        },
+        "question": {
+          "type": "string",
+          "description": "The framing question put to students before they set the sliders."
+        },
+        "court": {
+          "type": "array",
+          "description": "Exactly one entry per axis, matched by axisId.",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "axisId",
+              "position",
+              "explanation"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "axisId": {
+                "type": "string"
+              },
+              "position": {
+                "enum": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100,
+                  null
+                ],
+                "description": "0-100 in steps of 25 (50 = genuinely balanced). null = this axis is not at issue in the case; the page greys out the slider and shows no court marker. Never use 50 to mean 'not at issue'."
+              },
+              "explanation": {
+                "type": "string",
+                "description": "Why one defensible reading of the opinion lands here. If position is null, say why the axis is not at issue. Tied to the opinion, not to casebook text."
+              }
+            }
+          },
+          "maxItems": 3
+        },
+        "socraticPrompt": {
+          "type": "string",
+          "description": "Optional. Overrides the default discussion prompt."
+        },
+        "sourceNote": {
+          "type": "string",
+          "description": "Required pointer to where the case appears in the teaching materials, e.g. 'Casebook ch. 4'. Never paste text from the materials here."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Set true only after the professor has checked the reasoning against the opinion. The page can hide unverified cases."
+        },
+        "whyChosen": {
+          "type": "string",
+          "description": "1-2 sentences: why this case brings out the three spectrums better than other cases in the teaching materials. If it is strong on only some axes, say which."
+        }
+      }
+    }
+  }
+}

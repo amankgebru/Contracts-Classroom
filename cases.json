@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "selection": {
+    "instruction": "Choose the cases from the course teaching materials that best bring out the three spectrums: (1) textualism to contextualism, (2) autonomy to fairness, (3) rules to standards. Include up to 10 major cases listed in the teaching materials.",
+    "maxCases": 10,
+    "source": "Blum, Bushaw & Tu Contracts casebook, Sixth Edition Teacher's Manual, and course teaching slides in the instructor's Contracts project.",
+    "coverageGoal": "Across the set, court positions should be spread along each of the three spectrums (textualism to contextualism, autonomy to fairness, rules to standards), not clustered at one pole, so that students see real contrast between cases."
+  },
+  "axes": [
+    {
+      "id": "meaning",
+      "title": "Where does contractual meaning come from?",
+      "description": "How heavily should the court rely on the written words compared with surrounding context?",
+      "left": "Textualism",
+      "right": "Contextualism"
+    },
+    {
+      "id": "value",
+      "title": "What value gets priority?",
+      "description": "Does the approach emphasize enforcement of private ordering or give greater weight to fairness and equitable concerns?",
+      "left": "Autonomy",
+      "right": "Fairness"
+    },
+    {
+      "id": "constraint",
+      "title": "How constrained is the decision?",
+      "description": "Does the doctrine operate like a relatively predictable rule or a flexible standard requiring judicial judgment?",
+      "left": "Rules",
+      "right": "Standards"
+    }
+  ],
+  "cases": [
+    {
+      "id": "right-field",
+      "name": "Right Field Rooftops, LLC v. Chicago Baseball Holdings, LLC",
+      "topic": "Contract Interpretation",
+      "question": "When contractual language appears clear on its face, should a court look outside the agreement to determine whether another meaning is possible?",
+      "whyChosen": "This is the course materials' clearest example of the plain-meaning approach and therefore supplies an essential textualist counterweight to Pacific Gas. It also illustrates how textualism can reinforce private ordering and rule-like predictability.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 0,
+          "explanation": "The court begins with the contractual language and refuses to use extrinsic evidence to create ambiguity where it finds none. Context plays only a limited confirmatory role after the court determines the text is unambiguous."
+        },
+        {
+          "axisId": "value",
+          "position": 0,
+          "explanation": "The court strongly respects the allocation of rights embodied in a negotiated agreement between sophisticated parties represented by counsel. It does not use broader equitable concerns to relieve the rooftop businesses from the consequences of the language."
+        },
+        {
+          "axisId": "constraint",
+          "position": 25,
+          "explanation": "The plain-meaning methodology is relatively rule-like because extrinsic evidence becomes relevant only after ambiguity is found. Some judgment remains in deciding whether the words are actually susceptible to more than one reasonable meaning."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 15, Right Field Rooftops discussion, casebook page 567; course slides, Contract Interpretation and Construction, slides 56-59.",
+      "verified": false
+    },
+    {
+      "id": "pacific",
+      "name": "Pacific Gas & Electric Co. v. G.W. Thomas Drayage & Rigging Co.",
+      "topic": "Contract Interpretation",
+      "question": "When contractual language appears clear, how much surrounding context should a court consider before deciding what the language means?",
+      "whyChosen": "The teaching materials expressly present Pacific Gas as the powerful contextualist counterpart to Right Field Rooftops. The pairing gives students the sharpest contrast on the meaning axis and also exposes the relationship between contextual interpretation and standard-like judicial judgment.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 100,
+          "explanation": "The court strongly favors contextual interpretation. The judge should preliminarily consider credible extrinsic evidence to determine whether contractual language is reasonably susceptible to the asserted meaning rather than deciding ambiguity from the text alone."
+        },
+        {
+          "axisId": "value",
+          "position": 25,
+          "explanation": "The opinion's contextualism is principally a means of discovering the parties' intended bargain rather than correcting an unfair bargain. In that sense, its flexibility ultimately remains substantially oriented toward enforcing private ordering."
+        },
+        {
+          "axisId": "constraint",
+          "position": 100,
+          "explanation": "The reasonably-susceptible inquiry rejects a rigid four-corners methodology and requires substantial judicial evaluation of language and surrounding circumstances. This makes the approach strongly standard-like."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 15, Pacific Gas discussion, casebook page 573; course slides, Contract Interpretation and Construction, slides 60-63.",
+      "verified": false
+    },
+    {
+      "id": "masterson",
+      "name": "Masterson v. Sine",
+      "topic": "Parol Evidence Rule",
+      "question": "When should evidence of an alleged collateral agreement be admitted even though the parties have reduced their transaction to writing?",
+      "whyChosen": "Masterson extends the contextualist methodology of Pacific Gas from interpretation into integration and the parol evidence rule. Its majority and dissent make especially visible the choice between formal predictability and contextual inquiry into the parties' actual transaction.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 75,
+          "explanation": "The majority rejects determining integration solely from the four corners of the document and permits consideration of circumstances surrounding the transaction. The case is therefore strongly contextual, although its immediate issue is the content of the agreement rather than interpretation of a disputed word."
+        },
+        {
+          "axisId": "value",
+          "position": 50,
+          "explanation": "The majority seeks to avoid allowing the form of the writing to defeat an agreement the parties may actually have made, but that goal can itself be understood as protecting party autonomy. The opinion therefore does not map cleanly onto a simple autonomy-versus-fairness divide."
+        },
+        {
+          "axisId": "constraint",
+          "position": 75,
+          "explanation": "Determining whether the parties intended the writing as the exclusive embodiment of their agreement and whether a collateral term would naturally have been included requires contextual judgment. This is substantially more standard-like than a strict four-corners rule."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 16, Masterson discussion, casebook page 620.",
+      "verified": false
+    },
+    {
+      "id": "nfb-container-store",
+      "name": "National Federation of the Blind v. Container Store, Inc.",
+      "topic": "Consideration and Illusory Promises",
+      "question": "When does a party retain so much contractual discretion that its apparent promise supplies no consideration?",
+      "whyChosen": "This case provides a useful rule-oriented contrast to Wood. The court refuses to save an apparently illusory promise through a broadly implied good-faith obligation, showing students a comparatively formal approach to consideration and judicial implication of terms.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 25,
+          "explanation": "The court is relatively reluctant to supplement the parties' express arrangement with an implied limitation that would save the promise. The case therefore leans toward the expressed contractual terms, although interpretation methodology is not its central issue."
+        },
+        {
+          "axisId": "value",
+          "position": 50,
+          "explanation": "The result protects the consumer from an arbitration obligation unsupported by consideration, but the court reaches that result through conventional consideration doctrine rather than an explicit fairness inquiry. The opinion therefore does not clearly occupy either pole."
+        },
+        {
+          "axisId": "constraint",
+          "position": 25,
+          "explanation": "The illusory-promise inquiry is comparatively rule-like: if one party retains unrestricted discretion and no legally sufficient constraint supplies an obligation, consideration fails. The court declines to use a broad good-faith standard to cure the defect."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 9, National Federation of the Blind discussion, casebook page 314.",
+      "verified": false
+    },
+    {
+      "id": "wood",
+      "name": "Wood v. Lucy, Lady Duff-Gordon",
+      "topic": "Consideration and Implied Obligations",
+      "question": "When may a court imply an obligation of reasonable efforts to give legal content to an agreement that does not expressly state that obligation?",
+      "whyChosen": "Wood is an especially useful counterpoint to National Federation of the Blind because Cardozo is willing to construct an obligation from the agreement as a whole. It vividly demonstrates contextual construction and the movement from formal rules toward reasonableness standards.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 75,
+          "explanation": "The court reads the agreement as a whole, including its exclusivity, business structure, recitals, and related express promises, to find an implied undertaking. Meaning therefore comes from the contractual relationship and structure rather than isolated words alone."
+        },
+        {
+          "axisId": "value",
+          "position": 25,
+          "explanation": "Although the court uses a flexible method, its objective is largely to make the parties' chosen commercial arrangement operative rather than to redistribute benefits on fairness grounds. The implication of an obligation therefore substantially serves private ordering."
+        },
+        {
+          "axisId": "constraint",
+          "position": 75,
+          "explanation": "The court implies a reasonable-efforts obligation and thereby constructs a standard for performance. Determining what efforts are reasonable necessarily requires contextual judgment rather than application of a bright-line rule."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 9, Wood discussion, casebook page 321.",
+      "verified": false
+    },
+    {
+      "id": "hamer",
+      "name": "Hamer v. Sidway",
+      "topic": "Consideration",
+      "question": "Should courts enforce a bargained-for promise when the promisee gives up a legal freedom even though the exchange may not look economically equivalent?",
+      "whyChosen": "Hamer supplies a strong autonomy and relatively rule-oriented anchor. Its treatment of consideration emphasizes the legal sufficiency of the bargained-for detriment rather than judicial assessment of whether the exchange was substantively fair.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 50,
+          "explanation": "The opinion is not principally about textual versus contextual interpretation, so it does not clearly support either pole on this spectrum. Its importance for this exercise lies primarily on the autonomy and constraint axes."
+        },
+        {
+          "axisId": "value",
+          "position": 0,
+          "explanation": "The court enforces the bargain because the promisee surrendered legal rights in exchange for the promise, without requiring equivalent economic value. That approach strongly respects the parties' ability to determine for themselves what constitutes a worthwhile exchange."
+        },
+        {
+          "axisId": "constraint",
+          "position": 25,
+          "explanation": "The benefit-or-detriment and bargained-for-exchange framework operates comparatively like a rule once the requisite legal detriment and exchange are identified. It leaves less room for a court to refuse enforcement merely because the bargain appears unwise or unequal."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 9, Hamer v. Sidway discussion; identified by the Manual as the classic introductory consideration case.",
+      "verified": false
+    },
+    {
+      "id": "lhotka",
+      "name": "Lhotka v. Geographic Expeditions, Inc.",
+      "topic": "Unconscionability",
+      "question": "When should a court refuse to enforce an arbitration provision because the bargaining process and the resulting terms are too one-sided?",
+      "whyChosen": "Lhotka provides the strongest fairness-oriented case in the selected set and a clear example of a flexible standard. Its sliding-scale unconscionability analysis sharply contrasts with cases that enforce private ordering through more formal rules.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 50,
+          "explanation": "The principal issue is unconscionability rather than the interpretive choice between textual and contextual meaning. The court examines the agreement and bargaining circumstances, but that does not make the opinion a clear position on the interpretation spectrum."
+        },
+        {
+          "axisId": "value",
+          "position": 100,
+          "explanation": "The court refuses to enforce the arbitration provision because of the combination of impaired meaningful choice and substantially one-sided terms. Protecting against unfairness therefore overrides ordinary enforcement of the parties' written allocation of rights."
+        },
+        {
+          "axisId": "constraint",
+          "position": 100,
+          "explanation": "The sliding-scale relationship between procedural and substantive unconscionability requires balancing and substantial judicial judgment. The doctrine as applied is strongly standard-like."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 13, unconscionability section, Lhotka discussion, casebook page 489.",
+      "verified": false
+    },
+    {
+      "id": "zuver",
+      "name": "Zuver v. Airtouch Communications, Inc.",
+      "topic": "Unconscionability and Severance",
+      "question": "When some terms in an adhesive arbitration agreement are unfair, should the court invalidate the agreement or preserve the parties' bargain by severing only the offending provisions?",
+      "whyChosen": "Zuver is a valuable middle position between strong freedom-of-contract cases and Lhotka. It recognizes substantive fairness limits but preserves most of the parties' arbitration agreement, illustrating how autonomy and fairness can be accommodated rather than treated as all-or-nothing alternatives.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 50,
+          "explanation": "Although the opinion addresses interpretation among several issues, its central unconscionability and severance analysis does not clearly commit to either textualist or contextualist contract interpretation. A neutral placement avoids attributing an interpretive methodology the case does not clearly establish."
+        },
+        {
+          "axisId": "value",
+          "position": 75,
+          "explanation": "The court intervenes to remove terms it regards as substantively unconscionable, demonstrating a significant fairness concern. At the same time, it preserves the remainder of the arbitration agreement rather than displacing the parties' private ordering altogether."
+        },
+        {
+          "axisId": "constraint",
+          "position": 75,
+          "explanation": "Balancing procedural and substantive unconscionability and deciding whether offending provisions can be severed require considerable judicial judgment. The analysis is standard-like, although the court works within identifiable doctrinal elements and a severability framework."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 13, unconscionability section, Zuver discussion, casebook page 494.",
+      "verified": false
+    },
+    {
+      "id": "bert-allen",
+      "name": "Bert Allen Toyota, Inc. v. Grasz",
+      "topic": "Unilateral Mistake",
+      "question": "When one contracting party makes a serious mistake, when should the law nevertheless leave that party with the bargain it made?",
+      "whyChosen": "Bert Allen Toyota is particularly useful because mistake doctrine exposes the tension between enforcing an agreed allocation of risk and granting equitable relief from a serious error. The case lands closer to autonomy than students may initially expect and illustrates a doctrine that combines articulated factors with substantial judgment.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 50,
+          "explanation": "The dispute concerns mistake and avoidance rather than competing methodologies for interpreting contractual language. The opinion therefore does not clearly support either textualism or contextualism."
+        },
+        {
+          "axisId": "value",
+          "position": 25,
+          "explanation": "The court refuses to relieve the dealership from its unilateral mistake, particularly given its own lack of due care. The result favors stability of the bargain and allocation of responsibility over equitable rescue of the mistaken party."
+        },
+        {
+          "axisId": "constraint",
+          "position": 75,
+          "explanation": "Although the court articulates a multi-part test, deciding whether negligence bars relief and whether circumstances justify rescission requires significant judicial evaluation. The teaching materials themselves describe the analysis as difficult and less than mechanically predictable."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 17, unilateral mistake section, Bert Allen Toyota discussion, casebook page 668.",
+      "verified": false
+    },
+    {
+      "id": "hirschfeld",
+      "name": "Al Hirschfeld Foundation v. Margo Feiden Galleries, Ltd.",
+      "topic": "Material Breach",
+      "question": "When does a breach go sufficiently to the heart of the bargain to justify treating it as material?",
+      "whyChosen": "Al Hirschfeld supplies a strong standards-oriented endpoint outside interpretation and unconscionability. Materiality requires the court to identify the underlying purpose of the agreement and evaluate whether particular breaches defeat that purpose, while still protecting interests the parties chose to place at the heart of their bargain.",
+      "court": [
+        {
+          "axisId": "meaning",
+          "position": 75,
+          "explanation": "The court evaluates the breaches by reference to the agreement's structure and underlying purpose, including the nature of the parties' relationship. The case therefore uses a contextual understanding of the bargain, although the teaching materials indicate there was no significant dispute over contextual evidence."
+        },
+        {
+          "axisId": "value",
+          "position": 25,
+          "explanation": "The court's materiality analysis strongly protects the contractual interests the Foundation bargained to preserve, including control over reproduction and safeguarding the works. The result is therefore more closely tied to enforcement of the agreed bargain than to redistribution based on general fairness."
+        },
+        {
+          "axisId": "constraint",
+          "position": 100,
+          "explanation": "Material breach is a paradigmatic standard: the court must determine whether the breaches go to the heart or essential purpose of the agreement. That inquiry depends heavily on judgment about the significance of the breached obligations in the particular contractual relationship."
+        }
+      ],
+      "sourceNote": "Blum/Bushaw/Tu Teacher's Manual, Chapter 19, material breach section, Al Hirschfeld Foundation discussion, casebook page 748.",
+      "verified": false
+    }
+  ]
+}

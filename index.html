@@ -178,7 +178,7 @@
     }
 
     .slider-description {
-      margin: 0 0 20px;
+      margin: 0 0 32px;
       color: var(--gray);
     }
 
@@ -408,9 +408,62 @@
         font-size: 1.05rem;
       }
     }
+  
+    /* ---------- DATA-DRIVEN ADDITIONS ---------- */
+
+    .topic-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--navy);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .draft-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--light-orange);
+      border: 1px solid var(--orange);
+      color: #92400e;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .slider-card.not-at-issue .court-explanation {
+      border-left-color: var(--gray);
+      background: var(--light-gray);
+    }
+
+    .slider-card.not-at-issue input[type="range"] {
+      opacity: 0.35;
+    }
+
+    .instructor-note {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border: 1px dashed var(--gray);
+      border-radius: 8px;
+      background: var(--light-gray);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .load-error {
+      padding: 18px 22px;
+      border-left: 7px solid var(--red);
+      background: #fef2f2;
+      line-height: 1.5;
+    }
   </style>
 </head>
-
 <body>
 
   <main class="page">
@@ -422,242 +475,40 @@
       </div>
     </header>
 
-    <div class="toolbar">
+    <div id="loadError" class="load-error" hidden></div>
 
-      <div class="case-picker">
-        <label for="caseSelect">CASE</label>
+    <div id="app" hidden>
 
-        <select id="caseSelect">
-          <option value="pacific">
-            Pacific Gas & Electric Co. v. G.W. Thomas Drayage & Rigging Co.
-          </option>
-
-          <option value="masterson">
-            Masterson v. Sine
-          </option>
-
-          <option value="united">
-            United Airlines, Inc. v. Good Taste, Inc.
-          </option>
-
-          <option value="hirschfeld">
-            Al Hirschfeld Foundation v. Margo Feiden Galleries, Ltd.
-          </option>
-        </select>
+      <div class="toolbar">
+        <div class="case-picker">
+          <label for="caseSelect">CASE</label>
+          <select id="caseSelect"></select>
+        </div>
+        <button id="resetButton" type="button">Reset</button>
+        <button id="revealButton" type="button">Reveal Court</button>
       </div>
 
-      <button id="resetButton" type="button">
-        Reset
-      </button>
+      <div id="caseQuestion" class="case-question"></div>
 
-      <button id="revealButton" type="button">
-        Reveal Court
-      </button>
+      <div id="sliderArea"></div>
 
-    </div>
-
-
-    <div id="caseQuestion" class="case-question"></div>
-
-
-    <!-- SLIDER 1 -->
-
-    <section class="slider-card">
-
-      <div class="slider-heading">
-        <h2>1. Where does contractual meaning come from?</h2>
-        <div id="position1" class="student-position">Neutral</div>
+      <div id="legend" class="legend">
+        <span class="blue-dot"></span>
+        <strong>Blue circle:</strong> your/class position.
+        <span class="red-line"></span>
+        <strong>Red marker:</strong> one defensible characterization of the court.
+        <br><br>
+        The court marker is deliberately a teaching judgment rather than a
+        mathematical measurement. Students should be encouraged to challenge it.
+        A greyed-out slider means that spectrum is not at issue in the case.
       </div>
 
-      <p class="slider-description">
-        How heavily should the court rely on the written words compared with
-        surrounding context?
-      </p>
-
-      <div class="spectrum">
-
-        <div class="endpoint left">
-          TEXTUALISM
-        </div>
-
-        <div>
-
-          <div class="range-wrap">
-
-            <input
-              id="slider1"
-              type="range"
-              min="0"
-              max="100"
-              step="25"
-              value="50"
-              aria-label="Textualism to contextualism"
-            >
-
-            <div id="court1" class="court-marker"></div>
-
-          </div>
-
-          <div class="scale-labels">
-            <span>Strong</span>
-            <span>Moderate</span>
-            <span>Neutral</span>
-            <span>Moderate</span>
-            <span>Strong</span>
-          </div>
-
-        </div>
-
-        <div class="endpoint right">
-          CONTEXTUALISM
-        </div>
-
+      <div class="discussion">
+        <strong>Socratic prompt:</strong>
+        <span id="socraticText"></span>
       </div>
 
-      <div id="explanation1" class="court-explanation"></div>
-
-    </section>
-
-
-    <!-- SLIDER 2 -->
-
-    <section class="slider-card">
-
-      <div class="slider-heading">
-        <h2>2. What value gets priority?</h2>
-        <div id="position2" class="student-position">Neutral</div>
-      </div>
-
-      <p class="slider-description">
-        Does the approach emphasize enforcement of private ordering or give
-        greater weight to fairness and equitable concerns?
-      </p>
-
-      <div class="spectrum">
-
-        <div class="endpoint left">
-          AUTONOMY
-        </div>
-
-        <div>
-
-          <div class="range-wrap">
-
-            <input
-              id="slider2"
-              type="range"
-              min="0"
-              max="100"
-              step="25"
-              value="50"
-              aria-label="Autonomy to fairness"
-            >
-
-            <div id="court2" class="court-marker"></div>
-
-          </div>
-
-          <div class="scale-labels">
-            <span>Strong</span>
-            <span>Moderate</span>
-            <span>Neutral</span>
-            <span>Moderate</span>
-            <span>Strong</span>
-          </div>
-
-        </div>
-
-        <div class="endpoint right">
-          FAIRNESS
-        </div>
-
-      </div>
-
-      <div id="explanation2" class="court-explanation"></div>
-
-    </section>
-
-
-    <!-- SLIDER 3 -->
-
-    <section class="slider-card">
-
-      <div class="slider-heading">
-        <h2>3. How constrained is the decision?</h2>
-        <div id="position3" class="student-position">Neutral</div>
-      </div>
-
-      <p class="slider-description">
-        Does the doctrine operate like a relatively predictable rule or a
-        flexible standard requiring judicial judgment?
-      </p>
-
-      <div class="spectrum">
-
-        <div class="endpoint left">
-          RULES
-        </div>
-
-        <div>
-
-          <div class="range-wrap">
-
-            <input
-              id="slider3"
-              type="range"
-              min="0"
-              max="100"
-              step="25"
-              value="50"
-              aria-label="Rules to standards"
-            >
-
-            <div id="court3" class="court-marker"></div>
-
-          </div>
-
-          <div class="scale-labels">
-            <span>Strong</span>
-            <span>Moderate</span>
-            <span>Neutral</span>
-            <span>Moderate</span>
-            <span>Strong</span>
-          </div>
-
-        </div>
-
-        <div class="endpoint right">
-          STANDARDS
-        </div>
-
-      </div>
-
-      <div id="explanation3" class="court-explanation"></div>
-
-    </section>
-
-
-    <div id="legend" class="legend">
-
-      <span class="blue-dot"></span>
-      <strong>Blue circle:</strong> your/class position.
-
-      <span class="red-line"></span>
-      <strong>Red marker:</strong> one defensible characterization of the court.
-
-      <br><br>
-
-      The court marker is deliberately a teaching judgment rather than a
-      mathematical measurement. Students should be encouraged to challenge it.
-
-    </div>
-
-
-    <div class="discussion">
-
-      <strong>Socratic prompt:</strong>
-      What feature of the opinion would justify moving one of these controls
-      one position to the left or right?
+      <div id="instructorArea"></div>
 
     </div>
 
@@ -667,314 +518,234 @@
   <script>
 
     /* =========================================================
-       CASE DATA
+       Data lives in cases.json. This script builds the page from it.
+       Add ?instructor to the URL to show selection notes and sources.
        ========================================================= */
 
-    const cases = {
-
-      pacific: {
-
-        question:
-          "<strong>INTERPRETATION:</strong> When contractual language appears clear, how much surrounding context should a court consider before deciding what the language means?",
-
-        courtPositions: [100, 25, 100],
-
-        explanations: [
-
-          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court strongly favors contextual interpretation. Extrinsic evidence may be considered to determine whether apparently clear language is reasonably susceptible to the meaning asserted.",
-
-          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The opinion is principally concerned with discovering the parties’ intended meaning rather than correcting an unfair bargain. Private ordering therefore remains important.",
-
-          "<strong>RULES ↔ STANDARDS:</strong> The “reasonably susceptible” inquiry gives judges substantial interpretive discretion and moves away from a rigid four-corners rule."
-
-        ]
-
-      },
-
-
-      masterson: {
-
-        question:
-          "<strong>PAROL EVIDENCE:</strong> When should evidence of an alleged collateral agreement be admitted even though the parties have reduced their transaction to writing?",
-
-        courtPositions: [75, 75, 75],
-
-        explanations: [
-
-          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court resists determining integration solely from the face of the document and considers the circumstances surrounding the transaction.",
-
-          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The approach leaves room for evidence that the formal writing may not capture the parties’ entire understanding, reducing the risk that formality defeats an agreement actually made.",
-
-          "<strong>RULES ↔ STANDARDS:</strong> Asking whether parties would “naturally” have included the alleged collateral term in the writing requires contextual judgment rather than mechanical application of a four-corners rule."
-
-        ]
-
-      },
-
-
-      united: {
-
-        question:
-          "<strong>CONSTRUCTION & GOOD FAITH:</strong> When may the implied obligation of good faith constrain a party’s exercise of contractual discretion?",
-
-        courtPositions: [75, 75, 100],
-
-        explanations: [
-
-          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> Good-faith analysis requires looking beyond isolated contractual words to the bargain, the parties’ performance, and the commercial relationship.",
-
-          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The implied covenant may restrain opportunistic exercises of contractual discretion, although it cannot simply rewrite the bargain the parties chose.",
-
-          "<strong>RULES ↔ STANDARDS:</strong> Good faith is highly standard-like. Its application depends on contractual purpose, commercial context, reasonable expectations, and judicial evaluation."
-
-        ]
-
-      },
-
-
-      hirschfeld: {
-
-        question:
-          "<strong>MATERIAL BREACH:</strong> When does a breach go sufficiently to the heart of the bargain to justify treating it as material?",
-
-        courtPositions: [75, 25, 100],
-
-        explanations: [
-
-          "<strong>TEXTUALISM ↔ CONTEXTUALISM:</strong> The court considers the structure and underlying purpose of the agreement in deciding whether the breaches were fundamental.",
-
-          "<strong>AUTONOMY ↔ FAIRNESS:</strong> The analysis strongly protects the contractual interests the Foundation bargained to preserve, including control over reproduction and safeguarding the works.",
-
-          "<strong>RULES ↔ STANDARDS:</strong> Materiality is a paradigmatic standard. The court evaluates whether the breach defeats the root or essential purpose of the agreement rather than applying a simple bright-line test."
-
-        ]
-
-      }
-
-    };
-
-
-    /* =========================================================
-       ELEMENT REFERENCES
-       ========================================================= */
-
-    const caseSelect =
-      document.getElementById("caseSelect");
-
-    const caseQuestion =
-      document.getElementById("caseQuestion");
-
-    const resetButton =
-      document.getElementById("resetButton");
-
-    const revealButton =
-      document.getElementById("revealButton");
-
-    const legend =
-      document.getElementById("legend");
-
-
-    const sliders = [
-      document.getElementById("slider1"),
-      document.getElementById("slider2"),
-      document.getElementById("slider3")
-    ];
-
-
-    const positionLabels = [
-      document.getElementById("position1"),
-      document.getElementById("position2"),
-      document.getElementById("position3")
-    ];
-
-
-    const courtMarkers = [
-      document.getElementById("court1"),
-      document.getElementById("court2"),
-      document.getElementById("court3")
-    ];
-
-
-    const explanations = [
-      document.getElementById("explanation1"),
-      document.getElementById("explanation2"),
-      document.getElementById("explanation3")
-    ];
-
-
-    /* =========================================================
-       LABELS
-       ========================================================= */
-
-    const sliderLabels = [
-      [
-        "Strong Textualism",
-        "Moderate Textualism",
-        "Neutral",
-        "Moderate Contextualism",
-        "Strong Contextualism"
-      ],
-
-      [
-        "Strong Autonomy",
-        "Moderate Autonomy",
-        "Neutral",
-        "Moderate Fairness",
-        "Strong Fairness"
-      ],
-
-      [
-        "Strong Rules",
-        "Moderate Rules",
-        "Neutral",
-        "Moderate Standards",
-        "Strong Standards"
-      ]
-    ];
-
-
-    /* =========================================================
-       FUNCTIONS
-       ========================================================= */
-
-    function labelForSlider(sliderIndex, value) {
-
-      const index =
-        Math.round(Number(value) / 25);
-
-      return sliderLabels[sliderIndex][index];
-
+    const DEFAULT_SOCRATIC =
+      "What feature of the opinion would justify moving one of these " +
+      "controls one position to the left or right?";
+
+    const instructorMode =
+      new URLSearchParams(window.location.search).has("instructor");
+
+    let data = null;
+    let sliders = [];
+    let positionLabels = [];
+    let courtMarkers = [];
+    let explanations = [];
+    let cards = [];
+
+    const el = id => document.getElementById(id);
+
+    function make(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
     }
 
-
-    function updateStudentPosition(sliderIndex) {
-
-      const slider =
-        sliders[sliderIndex];
-
-      positionLabels[sliderIndex].textContent =
-        labelForSlider(
-          sliderIndex,
-          slider.value
-        );
-
+    function scaleLabels(axis) {
+      return [
+        "Strong " + axis.left,
+        "Moderate " + axis.left,
+        "Neutral",
+        "Moderate " + axis.right,
+        "Strong " + axis.right
+      ];
     }
 
+    function currentCase() {
+      return data.cases.find(c => c.id === el("caseSelect").value);
+    }
+
+    /* ---------- build the three slider cards once ---------- */
+
+    function buildSliders() {
+
+      const area = el("sliderArea");
+      area.replaceChildren();
+      sliders = []; positionLabels = []; courtMarkers = [];
+      explanations = []; cards = [];
+
+      data.axes.forEach((axis, i) => {
+
+        const card = make("section", "slider-card");
+
+        const heading = make("div", "slider-heading");
+        heading.append(make("h2", "", (i + 1) + ". " + axis.title));
+        const pos = make("div", "student-position", "Neutral");
+        heading.append(pos);
+        card.append(heading);
+
+        card.append(make("p", "slider-description", axis.description));
+
+        const spectrum = make("div", "spectrum");
+        spectrum.append(make("div", "endpoint left", axis.left.toUpperCase()));
+
+        const middle = make("div");
+        const wrap = make("div", "range-wrap");
+
+        const input = document.createElement("input");
+        input.type = "range";
+        input.min = "0"; input.max = "100"; input.step = "25"; input.value = "50";
+        input.setAttribute("aria-label", axis.left + " to " + axis.right);
+
+        const marker = make("div", "court-marker");
+        wrap.append(input, marker);
+        middle.append(wrap);
+
+        const scale = make("div", "scale-labels");
+        ["Strong", "Moderate", "Neutral", "Moderate", "Strong"]
+          .forEach(t => scale.append(make("span", "", t)));
+        middle.append(scale);
+
+        spectrum.append(middle);
+        spectrum.append(make("div", "endpoint right", axis.right.toUpperCase()));
+        card.append(spectrum);
+
+        const explanation = make("div", "court-explanation");
+        card.append(explanation);
+
+        input.addEventListener("input", () => updateStudentPosition(i));
+
+        area.append(card);
+        sliders.push(input);
+        positionLabels.push(pos);
+        courtMarkers.push(marker);
+        explanations.push(explanation);
+        cards.push(card);
+      });
+    }
+
+    /* ---------- behavior ---------- */
+
+    function updateStudentPosition(i) {
+      const index = Math.round(Number(sliders[i].value) / 25);
+      positionLabels[i].textContent = scaleLabels(data.axes[i])[index];
+    }
 
     function hideCourt() {
-
-      courtMarkers.forEach(marker => {
-        marker.classList.remove("visible");
-      });
-
-      explanations.forEach(box => {
-        box.classList.remove("visible");
-      });
-
-      legend.classList.remove("visible");
-
+      courtMarkers.forEach(m => m.classList.remove("visible"));
+      explanations.forEach(b => { b.classList.remove("visible"); b.replaceChildren(); });
+      cards.forEach(c => c.classList.remove("not-at-issue"));
+      el("legend").classList.remove("visible");
     }
-
 
     function resetSliders() {
-
-      sliders.forEach((slider, index) => {
-
-        slider.value = 50;
-
-        updateStudentPosition(index);
-
-      });
-
+      sliders.forEach((s, i) => { s.value = 50; updateStudentPosition(i); });
       hideCourt();
-
     }
-
 
     function loadCase() {
 
-      const selectedCase =
-        cases[caseSelect.value];
+      const c = currentCase();
+      const box = el("caseQuestion");
+      box.replaceChildren();
 
-      caseQuestion.innerHTML =
-        selectedCase.question;
+      const tag = make("div", "topic-tag", c.topic);
+      if (c.verified !== true) {
+        tag.append(make("span", "draft-badge", "Draft - not yet verified"));
+      }
+      box.append(tag, make("div", "", c.question));
+
+      el("socraticText").textContent = c.socraticPrompt || DEFAULT_SOCRATIC;
+
+      const area = el("instructorArea");
+      area.replaceChildren();
+      if (instructorMode) {
+        const note = make("div", "instructor-note");
+        note.append(make("strong", "", "Why this case: "));
+        note.append(document.createTextNode(c.whyChosen));
+        note.append(document.createElement("br"));
+        note.append(make("strong", "", "Source: "));
+        note.append(document.createTextNode(c.sourceNote));
+        area.append(note);
+      }
 
       resetSliders();
-
     }
-
 
     function revealCourt() {
 
-      const selectedCase =
-        cases[caseSelect.value];
+      const c = currentCase();
 
-      selectedCase.courtPositions.forEach(
-        (position, index) => {
+      c.court.forEach(entry => {
 
-          const marker =
-            courtMarkers[index];
+        const i = data.axes.findIndex(a => a.id === entry.axisId);
+        if (i < 0) return;
+        const axis = data.axes[i];
 
-          marker.style.left =
-            position + "%";
+        explanations[i].replaceChildren();
+        const lead = entry.position === null
+          ? axis.left.toUpperCase() + " \u2194 " + axis.right.toUpperCase() + " - NOT AT ISSUE: "
+          : axis.left.toUpperCase() + " \u2194 " + axis.right.toUpperCase() + ": ";
+        explanations[i].append(make("strong", "", lead));
+        explanations[i].append(document.createTextNode(entry.explanation));
+        explanations[i].classList.add("visible");
 
-          marker.classList.add("visible");
-
-
-          explanations[index].innerHTML =
-            selectedCase.explanations[index];
-
-          explanations[index].classList.add(
-            "visible"
-          );
-
+        if (entry.position === null) {
+          courtMarkers[i].classList.remove("visible");
+          cards[i].classList.add("not-at-issue");
+        } else {
+          courtMarkers[i].style.left = entry.position + "%";
+          courtMarkers[i].classList.add("visible");
+          cards[i].classList.remove("not-at-issue");
         }
-      );
+      });
 
-      legend.classList.add("visible");
-
+      el("legend").classList.add("visible");
     }
 
+    /* ---------- start up ---------- */
 
-    /* =========================================================
-       EVENT LISTENERS
-       ========================================================= */
+    function showError(message) {
+      const box = el("loadError");
+      box.textContent = message;
+      box.hidden = false;
+    }
 
-    sliders.forEach(
-      (slider, index) => {
+    async function init() {
 
-        slider.addEventListener(
-          "input",
-          () => updateStudentPosition(index)
+      try {
+        const response = await fetch("cases.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        data = await response.json();
+      } catch (err) {
+        showError(
+          "Could not load cases.json (" + err.message + "). " +
+          "Browsers block this when the page is opened directly from a file. " +
+          "View it through GitHub Pages or a local web server " +
+          "(for example, run: python3 -m http.server)."
         );
-
+        return;
       }
-    );
 
+      if (!data || !Array.isArray(data.axes) || data.axes.length !== 3 ||
+          !Array.isArray(data.cases) || data.cases.length === 0) {
+        showError("cases.json is not in the expected format (needs 3 axes and at least 1 case).");
+        return;
+      }
 
-    caseSelect.addEventListener(
-      "change",
-      loadCase
-    );
+      const select = el("caseSelect");
+      data.cases.forEach(c => {
+        const option = document.createElement("option");
+        option.value = c.id;
+        option.textContent = c.name;
+        select.append(option);
+      });
 
+      buildSliders();
 
-    resetButton.addEventListener(
-      "click",
-      resetSliders
-    );
+      select.addEventListener("change", loadCase);
+      el("resetButton").addEventListener("click", resetSliders);
+      el("revealButton").addEventListener("click", revealCourt);
 
+      el("app").hidden = false;
+      loadCase();
+    }
 
-    revealButton.addEventListener(
-      "click",
-      revealCourt
-    );
-
-
-    /* =========================================================
-       INITIALIZE
-       ========================================================= */
-
-    loadCase();
+    init();
 
   </script>
 
